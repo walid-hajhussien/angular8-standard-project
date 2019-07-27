@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 
 import {MsalService} from '@azure/msal-angular';
 import { Client } from '@microsoft/microsoft-graph-client';
-import {AlertsService} from "../alerts/alerts.service";
-import {MicrosoftGraphConfig} from "../../const/microsoftGraphConfig";
-import {User} from "../../class/user";
+import {AlertsService} from '../alerts/alerts.service';
+import {MicrosoftGraphConfig} from '../../const/microsoftGraphConfig';
+import {User} from '../../class/user';
 
 
 
@@ -14,20 +14,18 @@ import {User} from "../../class/user";
 export class AuthService {
   public authenticated: boolean;
   public isUserData: boolean;
-  public isAccessToken:boolean;
-  private token:string;
-  public isLogin:boolean;
+  public isAccessToken: boolean;
+  public isLogin: boolean;
   public user: User;
-
-
+  private token: string;
 
   constructor(private msalService: MsalService, private alertsService: AlertsService) {
-    this.authenticated=false;
-    this.isAccessToken=false;
-    this.isUserData=false;
-    this.isLogin=false;
-    this.msalService=msalService;
-    this.alertsService=alertsService;
+    this.authenticated = false;
+    this.isAccessToken = false;
+    this.isUserData = false;
+    this.isLogin = false;
+    this.msalService = msalService;
+    this.alertsService = alertsService;
   }
 
   // Prompt the user to sign in and
@@ -42,7 +40,7 @@ export class AuthService {
 
     if (result) {
       console.log('stage 1 pass', result);
-      this.authenticated=true;
+      this.authenticated = true;
 
       // get user data
       this.user = await this.getUser();
@@ -69,9 +67,9 @@ export class AuthService {
 
     // Temporary to display token in an error box
     if (result){
-      console.log("stage 2 pass AccessToken ",result);
-      this.token=result;
-      this.isAccessToken=true;
+      console.log('stage 2 pass AccessToken ', result);
+      this.token = result;
+      this.isAccessToken = true;
       return result;
     }
   }
@@ -93,8 +91,7 @@ export class AuthService {
             done(reason, null);
           });
 
-        if (token)
-        {
+        if (token) {
           done(null, token);
         } else {
           done('Could not get an access token', null);
@@ -107,16 +104,16 @@ export class AuthService {
 
     let user = new User();
 
-    if(graphUser){
-      console.log("stage3 get user data ",graphUser);
+    if (graphUser) {
+      console.log('stage3 get user data ', graphUser);
       user.displayName = graphUser.displayName;
       // Prefer the mail property, but fall back to userPrincipalName
       user.email = graphUser.mail || graphUser.userPrincipalName;
-      this.isLogin=true;
+      this.isLogin = true;
       return user;
-    }else{
+    } else {
       this.alertsService.clear();
-      this.alertsService.add('Get user data failed', "Could not get user data");
+      this.alertsService.add('Get user data failed', 'Could not get user data');
       return null;
     }
 
