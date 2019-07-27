@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -15,7 +15,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AlertsComponent } from './components/alerts/alerts.component';
 
 import { MsalModule } from '@azure/msal-angular';
-import { MicrosoftGraphConfig } from "./const/microsoftGraphConfig";
+import { MicrosoftGraphConfig } from './const/microsoftGraphConfig';
 
 library.add(faExternalLinkAlt);
 library.add(faUserCircle);

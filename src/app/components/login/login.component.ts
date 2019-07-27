@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../../services/authentication/auth.service";
+import {AuthService} from '../../services/authentication/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +9,7 @@ import {AuthService} from "../../services/authentication/auth.service";
 export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService) {
-    this.authService=authService;
+    this.authService = authService;
   }
 
   ngOnInit() {
@@ -17,10 +17,10 @@ export class LoginComponent implements OnInit {
 
   async signIn(): Promise<void> {
     await this.authService.signIn();
-    if(this.authService.isLogin){
-      console.log("login done");
-    }else{
-      console.log("login failed");
+    if (this.authService.isLogin){
+      console.log('login done');
+    } else {
+      console.log('login failed');
     }
 
   }
